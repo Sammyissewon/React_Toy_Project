@@ -5,9 +5,11 @@ import TodoBoard from "./components/TodoBoard";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todoList, setTodoList] = useState([]);
+
   const onChangeSetInputValue = (e) => {
     setInputValue(e.target.value);
   };
+
   const addItem = () => {
     // 기존 todoList를 남기고, 새로운 입력값을 추가
     setTodoList([...todoList, inputValue]);
