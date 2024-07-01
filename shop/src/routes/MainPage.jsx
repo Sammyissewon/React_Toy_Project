@@ -1,5 +1,6 @@
-import data from "./data";
-import Card from "./components/Card";
+import { Stack } from "react-bootstrap";
+import data from "../data";
+import Card from "../components/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function MainPage() {
