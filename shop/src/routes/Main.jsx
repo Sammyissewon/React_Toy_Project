@@ -1,9 +1,9 @@
 import { Stack } from "react-bootstrap";
-import data from "../data";
+import data from "../Shoes";
 import Card from "../components/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function MainPage() {
+function Main() {
   return (
     <div>
       {" "}
@@ -23,4 +23,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default Main;

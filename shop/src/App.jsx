@@ -3,8 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Nav, Navbar, Container, Stack } from "react-bootstrap";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
-import MainPage from "./routes/MainPage";
-import DetailPage from "./routes/DetailPage";
+import Main from "./routes/Main";
+import shoes from "./Shoes";
+import Detail from "./routes/Detail";
+import Event from "./routes/Event";
+import About from "./routes/About";
 
 function App() {
   let navigate = useNavigate();
@@ -22,19 +25,21 @@ function App() {
             >
               Home
             </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("./product");
-              }}
-            >
-              Product
-            </Nav.Link>
+
             <Nav.Link
               onClick={() => {
                 navigate("./detail");
               }}
             >
-              Info
+              Detail
+            </Nav.Link>
+
+            <Nav.Link
+              onClick={() => {
+                navigate("./event");
+              }}
+            >
+              Event
             </Nav.Link>
           </Nav>
           {/* 페이지 이동 버튼 만들기 */}
@@ -44,26 +49,23 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/detail" element={<DetailPage />} />
-        <Route path="*" element={<div>페이지가 존재하지 않습니다.</div>} />
-      </Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/detail" element={<Detail shoes={shoes} />} />
 
-      <Route path="/about" element={<About />}>
+        <Route path="/event" element={<Event />}>
+          <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
+          <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
+        </Route>
+
+        <Route path="*" element={<div>페이지가 존재하지 않습니다.</div>} />
+
         {/* Nested Route: 라우트 안의 라우트 */}
         {/* /about/member, /about/contact와 같다 */}
-        <Route path="member" element={<div>직원 정보</div>} />
-        <Route path="contact" element={<About />} />
-      </Route>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h4>회사 정보</h4>
-      <Outlet></Outlet>
+        <Route path="/about" element={<About />}>
+          <Route path="member" element={<div>직원 정보</div>} />
+          <Route path="contact" element={<div>회사 연락처</div>} />
+        </Route>
+      </Routes>
     </div>
   );
 }
