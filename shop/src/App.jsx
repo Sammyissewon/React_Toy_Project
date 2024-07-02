@@ -2,9 +2,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Nav, Navbar, Container, Stack } from "react-bootstrap";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import axios from "axios";
 
 import Main from "./routes/Main";
-import shoes from "./Shoes";
+import Shoes from "./components/Shoes";
 import Detail from "./routes/Detail";
 import Event from "./routes/Event";
 import About from "./routes/About";
@@ -50,7 +51,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        <Route path="/detail/:id" element={<Detail shoes={Shoes} />} />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />

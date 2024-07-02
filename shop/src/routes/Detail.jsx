@@ -27,6 +27,7 @@ function Detail(props) {
     if (isNaN(input) == true) {
       alert("숫자만 입력하세요!");
     }
+    //❗️❗️❗️❗️❗️❗️❗️❗️❗️
   }, [input]);
 
   let { id } = useParams();
