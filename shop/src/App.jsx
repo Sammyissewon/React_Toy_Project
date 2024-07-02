@@ -50,7 +50,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail" element={<Detail shoes={shoes} />} />
+        {/* 상세페이지 */}
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
