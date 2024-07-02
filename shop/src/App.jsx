@@ -28,7 +28,7 @@ function App() {
 
             <Nav.Link
               onClick={() => {
-                navigate("./detail");
+                navigate("/detail");
               }}
             >
               Detail
@@ -50,14 +50,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        {/* 상세페이지 */}
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
-
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
         </Route>
-
         <Route path="*" element={<div>페이지가 존재하지 않습니다.</div>} />
 
         {/* Nested Route: 라우트 안의 라우트 */}
