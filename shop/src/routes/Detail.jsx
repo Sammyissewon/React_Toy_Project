@@ -1,4 +1,23 @@
 import { useParams } from "react-router-dom";
+// 버튼 같은 거 만들고 꾸미고 싶은데, CSS 파일 쓰기 싫을 때.
+import styled from "styled-components";
+
+// styled-component도 컴포넌트
+let Button = styled.button`
+  background: ${(props) => props.bg};
+  color: ${(props) => (props.bg == "pink" ? "grey" : "black")};
+  padding: 10px;
+`;
+
+let NewButton = styled.button(Button);
+
+// styled-component도 중복되는 내용이라면,
+// 이런 하드코딩 하지말고, props를 활용할 것
+// let Button2 = styled.button`
+//   background: blue;
+//   color: black;
+//   padding: 10px;
+// `;
 
 function Detail(props) {
   let { id } = useParams();
@@ -7,6 +26,10 @@ function Detail(props) {
   return (
     <div>
       <div className="container">
+        {/* styled-component 삽입 */}
+        <Button bg="pink">버튼</Button>
+        <Button bg="skyblue">버튼2</Button>
+        <NewButton bg="green">버튼3</NewButton>
         <div className="row">
           <div className="col-md-6">
             <img
