@@ -5,7 +5,9 @@ function Cart() {
     <div>
       <Table>
         <thead>
+          {/* 가로칸 생성 */}
           <tr>
+            {/* 세로칸 생성 */}
             <th>#</th>
             <th>상품명</th>
             <th>수량</th>
