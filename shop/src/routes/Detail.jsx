@@ -2,8 +2,10 @@ import { useParams } from "react-router-dom";
 // 버튼 같은 거 만들고 꾸미고 싶은데, CSS 파일 쓰기 싫을 때.
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
-import { useEffect, useState } from "react";
-import shoes from "../components/Shoes";
+import { useContext, useEffect, useState } from "react";
+
+// 부모가 보낸 state 보관함을 import
+import { Context1 } from "../App";
 
 // styled-component도 컴포넌트이며, props, js 삼항연산자 활용 가능
 let Button = styled.button`
@@ -19,6 +21,9 @@ function Detail(props) {
   let [fade, setFade] = useState("");
 
   let { id } = useParams();
+
+  // state 보관함을 해체 및 object 형식으로 저장
+  let { stock } = useContext(Context1);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -115,13 +120,15 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TapContent tap={tap} shoes={shoes} />
+      <TapContent shoes={props.shoes} tap={tap} />
     </div>
   );
 }
 
 function TapContent({ tap, shoes }) {
   let [fade, setFade] = useState("");
+  // 부모의 부모 컴포넌트(App.jsx) state를 갖다 쓸 수 있음 -> props 없이 작업 가능
+  let { stock } = useContext(Context1);
 
   useEffect(() => {
     setTimeout(() => {
@@ -134,7 +141,7 @@ function TapContent({ tap, shoes }) {
 
   return (
     <div className={"start " + fade}>
-      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][tap]}
+      {[<div>{stock}</div>, <div>내용1</div>, <div>내용2</div>][tap]}
     </div>
   );
 }

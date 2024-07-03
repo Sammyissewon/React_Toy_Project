@@ -3,15 +3,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Nav, Navbar, Container, Stack } from "react-bootstrap";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
 import Main from "./routes/Main";
-import Shoes from "./components/Shoes";
+import shoes from "./components/Shoes";
 import Detail from "./routes/Detail";
 import Event from "./routes/Event";
 import About from "./routes/About";
+import Cart from "./routes/Cart";
+
+import { createContext } from "react";
+
+// state 보관함을 자식들에게 export
+export let Context1 = createContext();
 
 function App() {
   let navigate = useNavigate();
+  let [stock] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -51,7 +59,14 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail/:id" element={<Detail shoes={Shoes} />} />
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ stock }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
@@ -64,6 +79,8 @@ function App() {
           <Route path="member" element={<div>직원 정보</div>} />
           <Route path="contact" element={<div>회사 연락처</div>} />
         </Route>
+
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );
