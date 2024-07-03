@@ -23,16 +23,18 @@ function Main() {
         <div>
           <button
             onClick={() => {
+              // 로딩 중 UI 띄우기
               axios
-                // 해당 URL에게 데이터 달라고 요청
                 .get("https://codingapple1.github.io/shop/data2.json")
                 .then((result) => {
                   result;
                   let extraShoes = result.data;
                   setShoesList([...shoesList, ...extraShoes]);
+                  // 로딩 중 UI 숨기기
                 })
                 .catch(() => {
                   console.log("데이터 요청을 실패");
+                  // 로딩 중 UI 띄우기
                 });
             }}
           >

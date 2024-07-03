@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 // 버튼 같은 거 만들고 꾸미고 싶은데, CSS 파일 쓰기 싫을 때.
 import styled from "styled-components";
+import Nav from "react-bootstrap/Nav";
 import { useEffect, useState } from "react";
 
 // styled-component도 컴포넌트이며, props 활용 가능
@@ -14,6 +15,7 @@ let Button = styled.button`
 function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [input, setInput] = useState("");
+  let [tap, setTap] = useState(0);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -68,8 +70,48 @@ function Detail(props) {
           </div>
         </div>
       </div>{" "}
+      {/* defaultActiveKey: 기본으로 눌려있을 버튼 */}
+      <Nav variant="tabs" defaultActiveKey="/home">
+        <Nav.Item>
+          <Nav.Link
+            eventKey="/home"
+            onClick={() => {
+              setTap(0);
+            }}
+          >
+            버튼0
+          </Nav.Link>
+        </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-1"
+            onClick={() => {
+              setTap(1);
+            }}
+          >
+            버튼1
+          </Nav.Link>
+        </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link
+            eventKey="Link-2"
+            onClick={() => {
+              setTap(2);
+            }}
+          >
+            버튼2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TapContent tap={tap} />
     </div>
   );
+}
+
+function TapContent({ tap }) {
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tap];
 }
 
 export default Detail;
