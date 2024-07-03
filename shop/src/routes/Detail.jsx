@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
 import { useEffect, useState } from "react";
+import shoes from "../components/Shoes";
 
-// styled-component도 컴포넌트이며, props 활용 가능
+// styled-component도 컴포넌트이며, props, js 삼항연산자 활용 가능
 let Button = styled.button`
   background: ${(props) => props.bg};
-  // 2. JS 문법도 활용 가능
   color: ${(props) => (props.bg == "pink" ? "grey" : "black")};
   padding: 10px;
 `;
@@ -16,6 +16,9 @@ function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [input, setInput] = useState("");
   let [tap, setTap] = useState(0);
+  let [fade, setFade] = useState("");
+
+  let { id } = useParams();
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -32,11 +35,18 @@ function Detail(props) {
     //❗️❗️❗️❗️❗️❗️❗️❗️❗️
   }, [input]);
 
-  let { id } = useParams();
+  useEffect(() => {
+    setTimeout(() => {
+      setFade("end");
+    }, 100);
+    return () => {
+      setFade("");
+    };
+  }, []);
 
   return (
     <div>
-      <div className="container">
+      <div className={"container start " + fade}>
         <div className="alert alert-warning">
           {alert ? <div>2초 할인</div> : <></>}
         </div>
@@ -105,13 +115,28 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TapContent tap={tap} />
+      <TapContent tap={tap} shoes={shoes} />
     </div>
   );
 }
 
-function TapContent({ tap }) {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tap];
+function TapContent({ tap, shoes }) {
+  let [fade, setFade] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFade("end");
+    }, 100);
+    return () => {
+      setFade("");
+    };
+  }, [tap]);
+
+  return (
+    <div className={"start " + fade}>
+      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][tap]}
+    </div>
+  );
 }
 
 export default Detail;
