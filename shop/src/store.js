@@ -8,21 +8,38 @@ let cart = createSlice({
     { id: 2, name: "Grey Yordan", count: 0 },
   ],
   reducers: {
+    // 상품 수량 +1
     buyOne(state, action) {
-      // (state.cart[i].id) => action.payload
-      // a는 state 배열 안의 요소들
-      // a와 state.cart[i].id가 같다면, 그게 몇번째 자료인지 변수에 저장
       let 번호 = state.findIndex((a) => {
         return a.id === action.payload;
       });
       state[번호].count++;
     },
+
+    // 상품 수량 -1
+    deleteOne(state, action) {
+      let 번호 = state.findIndex((a) => {
+        return a.id === action.payload;
+      });
+      state[번호].count--;
+    },
+
+    // 중복 체크 후 아이템 추가 또는 수량 증가
+    addItem(state, action) {
+      let 존재하는아이템 = state.findIndex((a) => {
+        return a.id === action.payload.id;
+      });
+      if (존재하는아이템 === -1) {
+        state.push(action.payload);
+      } else {
+        state[존재하는아이템].count++;
+      }
+    },
   },
 });
 
-export let { buyOne } = cart.actions;
+export let { buyOne, addItem, deleteOne } = cart.actions;
 
-// 여기에 slice(state)를 등록해야 함. state명.reducer
 export default configureStore({
   reducer: {
     user: user.reducer,

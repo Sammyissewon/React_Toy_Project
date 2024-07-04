@@ -50,6 +50,14 @@ function App() {
             >
               Event
             </Nav.Link>
+
+            <Nav.Link
+              onClick={() => {
+                navigate("./cart");
+              }}
+            >
+              Cart
+            </Nav.Link>
           </Nav>
           {/* 페이지 이동 버튼 만들기 */}
           <Link to="/">홈</Link>

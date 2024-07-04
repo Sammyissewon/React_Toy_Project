@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
 import { useContext, useEffect, useState } from "react";
+import { addItem } from "../store";
+import { useDispatch } from "react-redux";
 
 // 부모가 보낸 state 보관함을 import
 import { Context1 } from "../App";
@@ -19,6 +21,7 @@ function Detail(props) {
   let [input, setInput] = useState("");
   let [tap, setTap] = useState(0);
   let [fade, setFade] = useState("");
+  let dispatch = useDispatch();
 
   let { id } = useParams();
 
@@ -81,7 +84,14 @@ function Detail(props) {
             <h4 className="pt-5">{props.shoes[id].title}</h4>
             <p>{props.shoes[id].content}</p>
             <p>{props.shoes[id].price}</p>
-            <button className="btn btn-danger">주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
+              }}
+            >
+              주문하기
+            </button>
           </div>
         </div>
       </div>{" "}
