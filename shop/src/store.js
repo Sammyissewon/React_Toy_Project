@@ -1,11 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import user from "./store/useSlice";
 
-let user = createSlice({
-  name: "user",
-  initialState: "lee",
-});
-
-let cart2 = createSlice({
+let cart = createSlice({
   name: "cart",
   initialState: [
     { id: 0, name: "White and Black", count: 2 },
@@ -17,6 +13,6 @@ let cart2 = createSlice({
 export default configureStore({
   reducer: {
     user: user.reducer,
-    cart: cart2.reducer,
+    cart: cart.reducer,
   },
 });
