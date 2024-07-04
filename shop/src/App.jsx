@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Nav, Navbar, Container, Stack } from "react-bootstrap";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Main from "./routes/Main";
 import shoes from "./components/Shoes";
@@ -18,6 +18,11 @@ import { createContext } from "react";
 export let Context1 = createContext();
 
 function App() {
+  // 유저가 방문한 상세페이지 localStorage에 남기기
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
+
   let navigate = useNavigate();
   let [stock] = useState([10, 11, 12]);
 
@@ -61,7 +66,7 @@ function App() {
           </Nav>
           {/* 페이지 이동 버튼 만들기 */}
           <Link to="/">홈</Link>
-          <Link to="/detail">상세페이지</Link>
+          <Link to="/detail/0">상세페이지</Link>
         </Container>
       </Navbar>
 

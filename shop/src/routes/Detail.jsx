@@ -23,6 +23,7 @@ function Detail(props) {
   let [fade, setFade] = useState("");
   let dispatch = useDispatch();
 
+  // /detail/:id와 연결됨
   let { id } = useParams();
 
   // state 보관함을 해체 및 object 형식으로 저장
