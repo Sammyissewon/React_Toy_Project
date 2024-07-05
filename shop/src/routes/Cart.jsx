@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { changeUpAge } from "../store/userSlice";
 import { buyOne, deleteOne } from "../store";
+import { useState, memo, useMemo } from "react";
 
 function Cart() {
   let state = useSelector((state) => state);
