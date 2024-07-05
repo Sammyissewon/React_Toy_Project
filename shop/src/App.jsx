@@ -18,13 +18,10 @@ import { createContext } from "react";
 export let Context1 = createContext();
 
 function App() {
-  // 유저가 방문한 상세페이지 localStorage에 남기기
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify([]));
-  }, []);
-
   let navigate = useNavigate();
   let [stock] = useState([10, 11, 12]);
+
+  axios.get("https://codingapple1.github.io/userdata.json");
 
   return (
     <div className="App">

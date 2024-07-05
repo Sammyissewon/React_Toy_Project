@@ -53,6 +53,20 @@ function Detail(props) {
     };
   }, []);
 
+  useEffect(() => {
+    // 1. localStorage에서 "watched"라는 key로 저장된 값을 가져옴.
+    //    값이 없으면 빈 배열([])을 할당.
+    let watched = JSON.parse(localStorage.getItem("watched")) || [];
+
+    // 2. 가져온 배열(watched)에 현재 페이지의 id가 포함되어 있는지 확인.
+    if (!watched.includes(id)) {
+      // 3. 현재 페이지의 id가 배열에 포함되어 있지 않으면 배열에 추가.
+      watched.push(id);
+      // 4. 업데이트된 배열을 다시 JSON 형식으로 문자열화하여 localStorage에 저장.
+      localStorage.setItem("watched", JSON.stringify(watched));
+    }
+  }, [id]);
+
   return (
     <div>
       <div className={"container start " + fade}>
