@@ -4,6 +4,7 @@ import { Button, Nav, Navbar, Container, Stack } from "react-bootstrap";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 import Main from "./routes/Main";
 import shoes from "./components/Shoes";
@@ -21,7 +22,18 @@ function App() {
   let navigate = useNavigate();
   let [stock] = useState([10, 11, 12]);
 
-  axios.get("https://codingapple1.github.io/userdata.json");
+  // 서버에서 유저 이름 가져와 보여주기
+  // useQuery의 장점
+  // 1. 성공/ 실패/ 로딩중 파악 용이
+  let result = useQuery("작명", () => {
+    return axios
+      .get("https://codingapple1.github.io/userdata.json")
+      .then((a) => {
+        console.log("요청됨");
+
+        return a.data;
+      });
+  });
 
   return (
     <div className="App">
@@ -29,6 +41,9 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">OOTD</Navbar.Brand>
           <Nav className="me-auto">
+            {result.isLoading && "로딩중"}
+            {result.error && "에러남"}
+            {result.data && result.data.name}
             <Nav.Link
               onClick={() => {
                 navigate("./");
