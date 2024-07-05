@@ -35,8 +35,32 @@ function App() {
       });
   });
 
+  // ---비동기 연습---
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+
+  useEffect(() => {
+    if (count != 0 && count < 3) {
+      setAge(age + 1);
+    }
+  }, [count]);
+  // ---비동기 연습---
+
   return (
     <div className="App">
+      {/* 비동기 연습 */}
+      <div>
+        <div>안녕하십니까 전 {age}</div>
+        <button
+          onClick={() => {
+            setCount(count + 1);
+          }}
+        >
+          누르면한살먹기
+        </button>
+      </div>
+      {/* 비동기 연습 */}
+
       <Navbar className="navBar" data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="#home">OOTD</Navbar.Brand>
