@@ -5,7 +5,7 @@
 .title {
   margin-top: 50px;
   color: white;
-  font-size: 60px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@
   cursor: pointer;
   border-radius: 50px;
   background: #1f3540;
-  font-size: 26px;
+  font-size: 20px;
   color: #26ffcd;
   margin-top: 25px;
   margin-bottom: 50px;
