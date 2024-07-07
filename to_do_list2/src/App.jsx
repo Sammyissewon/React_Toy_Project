@@ -32,7 +32,7 @@ const mockData = [
 
 function App() {
   // 12. List 입력값을 업데이트하는 state
-  const [todos, setTodos] = useState([mockData]);
+  const [todos, setTodos] = useState(mockData);
 
   // 23. 목업데이터의 id가 0~2이어서, 새로 입력한 값은 id: 3부터 시작함. 따라서 useRef의 초기값은 3
   const idRef = useRef(3);
@@ -55,7 +55,7 @@ function App() {
       <Header />
       {/* 15. Editor 컴포넌트에 함수 props 전달 */}
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} />
     </div>
   );
 }
