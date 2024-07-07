@@ -83,9 +83,9 @@ const TicTacToe = () => {
     setLock(false);
     data = ["", "", "", "", "", "", "", "", ""];
     titleRef.current.innerHTML = "Tic Tac Toe In <span>React</span>";
-    box_array.map((e)=>{
-        e.current.innerHTML="";
-    })
+    box_array.map((e) => {
+      e.current.innerHTML = "";
+    });
   };
 
   return (
@@ -105,6 +105,7 @@ const TicTacToe = () => {
           <div
             className="boxes"
             ref={box2}
+            onClick={(e) => {
               toggle(e, 1);
             }}
           ></div>
