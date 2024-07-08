@@ -40,7 +40,7 @@ const Editor = ({ onCreate }) => {
         // 27. 입력창이 빈칸시 focus 효과 적용하기
         ref={contentRef}
         value={content}
-        // 20. 뭔가를 입려하면 setContet 변경함수를 실행
+        // 20. 뭔가를 입력하면 setContet 변경함수를 실행
         onChange={onChangeContent}
         // 31. 엔터기로 실행하기
         onKeyDown={onKeydown}

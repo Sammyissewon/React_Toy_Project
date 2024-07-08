@@ -22,11 +22,11 @@ const List = ({ todos }) => {
     }
     // 41. 서치창에 입력값을 포함한 값들만 걸러서 반환
     // 43. true인 값들만 filter해서 반환
-    return todos.filter((todo) => {
+    return todos.filter((todo) =>
       // 42. content가 서치 입력창 내용을 includes하면 true
       // 45. 대소문자 관계 없이 검색되도록, 소문자 전환 메서드 사용
-      todo.content.toLowerCase().includes(search.toLowerCase());
-    });
+      todo.content.toLowerCase().includes(search.toLowerCase())
+    );
   };
 
   // 44. 서치창 필터링함수를 변수로 지정

@@ -8,7 +8,7 @@ let cart = createSlice({
     { id: 2, name: "Grey Yordan", count: 0 },
   ],
   reducers: {
-    // 상품 수량 +1
+    // 상품 수량 +1하는 함수
     buyOne(state, action) {
       let 번호 = state.findIndex((a) => {
         return a.id === action.payload;
