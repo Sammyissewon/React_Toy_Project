@@ -6,19 +6,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import OptionSelector from "./OptionSelector";
 
+import "./Header.css";
+
 const Header = () => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div>
-      <div className="form-group">
+    <div className="input-form">
+      <div className="name">
         <label htmlFor="name">이름</label>
-        <input type="text" className="form-control" />
+        <input type="text" />
       </div>
-
-      <div className="form-group">
+      <div className="price">
         <label htmlFor="price">가격</label>
-        <input type="text" className="form-control" />
+        <input type="text" />
       </div>
 
       <Dropdown>
@@ -35,19 +36,23 @@ const Header = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      <div>
+      <div className="purchasing-date">
         <div>구입날짜</div>
-        <DatePicker selected={date} onChange={(date) => setDate(date)} />
+        <DatePicker
+          className="calendar"
+          selected={date}
+          onChange={(date) => setDate(date)}
+        />
       </div>
 
-      <div>
+      <div className="memo">
         <input type="checkbox" />
-        <label htmlFor="check">메모 작성</label>
+        <label>메모 작성</label>
         <input type="text" />
       </div>
 
-      <div>
-        재구매의사
+      <div className="option-selector">
+        <lable>재구매의사</lable>
         <OptionSelector />
       </div>
     </div>

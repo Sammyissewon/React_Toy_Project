@@ -1,11 +1,12 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Filter.css";
 
 const Filter = () => {
   return (
-    <div>
-      <Dropdown>
+    <div className="filter">
+      <Dropdown className="category">
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           유형 필터
         </Dropdown.Toggle>
@@ -19,7 +20,7 @@ const Filter = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Dropdown>
+      <Dropdown className="standard">
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           정렬 기준
         </Dropdown.Toggle>
