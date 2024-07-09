@@ -1,25 +1,58 @@
 import React from "react";
+
+import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store";
+
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
 import OptionSelector from "./OptionSelector";
 
 import "./Header.css";
 
 const Header = () => {
   const [date, setDate] = useState(new Date());
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [type, setType] = useState("식료품");
+  const [memo, setMemo] = useState("");
+  const [isMemoChecked, setIsMemoChecked] = useState(false);
+  const dispatch = useDispatch();
+
+  const idRef = useRef(3);
+
+  const handleSubmit = () => {
+    const newItem = {
+      id: idRef.current,
+      date: date.getTime(),
+      type,
+      name,
+      price: Number(price),
+      memo,
+    };
+    dispatch(addItem(newItem));
+    idRef.current += 1;
+  };
 
   return (
     <div className="input-form">
       <div className="name">
         <label htmlFor="name">이름</label>
-        <input type="text" />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div className="price">
         <label htmlFor="price">가격</label>
-        <input type="text" />
+        <input
+          type="text"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
       </div>
 
       <Dropdown>
@@ -27,12 +60,22 @@ const Header = () => {
           유형
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">식료품</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">생필품</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">교통비</Dropdown.Item>
-          <Dropdown.Item href="#/action-4">공과금</Dropdown.Item>
-          <Dropdown.Item href="#/action-5">사치품</Dropdown.Item>
-          <Dropdown.Item href="#/action-6">적금</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("식료품")}>
+            식료품
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("생필품")}>
+            생필품
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("교통비")}>
+            교통비
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("공과금")}>
+            공과금
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("사치품")}>
+            사치품
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType("적금")}>적금</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
@@ -46,15 +89,26 @@ const Header = () => {
       </div>
 
       <div className="memo">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={isMemoChecked}
+          onChange={(e) => setIsMemoChecked(e.target.checked)}
+        />
         <label>메모 작성</label>
-        <input type="text" />
+        {isMemoChecked && (
+          <input
+            type="text"
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
+          />
+        )}
       </div>
 
       <div className="option-selector">
         <lable>재구매의사</lable>
         <OptionSelector />
       </div>
+      <button onClick={handleSubmit}>저장하기</button>
     </div>
   );
 };
