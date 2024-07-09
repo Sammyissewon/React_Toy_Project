@@ -8,8 +8,7 @@ import "./Filter.css";
 const Filter = () => {
   const [selectedCategory, setSelectedCategory] = useState("유형 필터");
   const [selectedStandard, setSelectedStandard] = useState("정렬 기준");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+
   return (
     <div className="filter">
       <Dropdown className="category">

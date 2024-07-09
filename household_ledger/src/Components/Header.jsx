@@ -16,7 +16,7 @@ const Header = () => {
   const [date, setDate] = useState(new Date());
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [type, setType] = useState("식료품");
+  const [type, setType] = useState("구매유형");
   const [memo, setMemo] = useState("");
   const [isMemoChecked, setIsMemoChecked] = useState(false);
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const Header = () => {
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          유형
+          {type}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => setType("식료품")}>
