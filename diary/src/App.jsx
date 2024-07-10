@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useRef } from "react";
 // components
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
@@ -17,17 +17,95 @@ const mockData = [
     emotionId: 1,
     content: "1번 일기",
   },
+  {
+    id: 2,
+    createdDate: new Date().getTime(),
+    emotionId: 2,
+    content: "2번 일기",
+  },
 ];
 
+//기능 3가지(생성, 수정, 삭제)를 담당할 함수
 function reducer(state, action) {
-  return state;
+  switch (action.type) {
+    case "CREATE":
+      return [action.data, ...state];
+    case "UPDATE":
+      return state.map((item) =>
+        // 기존 state의 id 중에 수정하려는 id와 동일한게 있으면, UPDATE 객체 데이터로 변환. 아니면, 원래 값 유지
+        // 혹시 모르니, string으로 한번씩 감싸기
+        String(item.id) === String(action.data.id) ? action.data : item
+      );
+    case "DELETE":
+      // 필터링 돌려서, action.id와 같지 않은 item들만 반환 -> 즉, Id와 같은 Item은 삭제한다는 뜻
+      return state.filter((item) => String(item.id) !== String(action.id));
+    default:
+      return state;
+  }
 }
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
+  const idRef = useRef(3); // mockData에 1,2가 있으니, 3부터 시작
+
+  //기능 1. 새로운 일기 추가
+  const onCreate = (createdDate, emotionId, content) => {
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: idRef.current++, // 2부터 1씩 증가
+        createdDate,
+        emotionId,
+        content,
+      },
+    });
+  };
+
+  //기능 2. 기존 일기 수정
+  const onUpdate = (id, createdDate, emotionId, content) => {
+    dispatch({
+      type: "UPDATE",
+      data: {
+        id, // 2부터 1씩 증가
+        createdDate,
+        emotionId,
+        content,
+      },
+    });
+  };
+
+  //기능 3. 기존 일기 삭제
+  const onDelete = (id) => {
+    dispatch({
+      type: "DELETE",
+      id,
+    });
+  };
 
   return (
     <>
+      <button
+        onClick={() => {
+          onCreate(new Date().getTime(), 1, "안녕");
+        }}
+      >
+        새 일기
+      </button>
+      <button
+        onClick={() => {
+          onUpdate(1, new Date().getTime(), 3, "수정된 일기입니다");
+        }}
+      >
+        일기 수정 테스트
+      </button>
+      <button
+        onClick={() => {
+          onDelete(1);
+        }}
+      >
+        일기 삭제 테스트
+      </button>
+
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
