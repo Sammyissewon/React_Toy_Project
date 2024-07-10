@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useReducer, useRef, createContext } from "react";
 // components
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
@@ -43,6 +43,10 @@ function reducer(state, action) {
       return state;
   }
 }
+
+// data state를 모든 자식 컴포넌트에게 데이터+버튼을 공급하기 위한 작업
+const DiaryStateContext = createContext();
+const DiaryDispatchContext = createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
@@ -106,15 +110,20 @@ function App() {
         일기 삭제 테스트
       </button>
 
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/new" element={<New />}></Route>
-        {/* :id : 동적경로인 URL Parameter를 사용하겠다 */}
-        <Route path="/diary:id" element={<Diary />}></Route>
-        <Route path="/edit/:id" element={<Edit />}></Route>
-        {/* *: wild card */}
-        <Route path="*" element={<Notfound />}></Route>
-      </Routes>
+      {/* data state를 모든 자식 컴포넌트에게 공급하기 위한 작업 */}
+      <DiaryStateContext.Provider value={data}>
+        <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/new" element={<New />}></Route>
+            {/* :id : 동적경로인 URL Parameter를 사용하겠다 */}
+            <Route path="/diary:id" element={<Diary />}></Route>
+            <Route path="/edit/:id" element={<Edit />}></Route>
+            {/* *: wild card */}
+            <Route path="*" element={<Notfound />}></Route>
+          </Routes>
+        </DiaryDispatchContext.Provider>
+      </DiaryStateContext.Provider>
     </>
   );
 }
