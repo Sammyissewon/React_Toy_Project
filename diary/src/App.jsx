@@ -10,18 +10,28 @@ import Notfound from "./pages/Notfound";
 // useNavigate: 특정 경로로 네비게이션(이동)할 수 있는 함수를 반환
 import { Routes, Route } from "react-router-dom";
 
+// data state를 모든 자식 컴포넌트에게 데이터+버튼을 공급하기 위한 작업
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
+
 const mockData = [
   {
     id: 1,
-    createdDate: new Date().getTime(),
+    createdDate: new Date("2024-05-15").getTime(),
     emotionId: 1,
     content: "1번 일기",
   },
   {
     id: 2,
-    createdDate: new Date().getTime(),
+    createdDate: new Date("2024-05-14").getTime(),
     emotionId: 2,
     content: "2번 일기",
+  },
+  {
+    id: 3,
+    createdDate: new Date("2024-06-10").getTime(),
+    emotionId: 2,
+    content: "3번 일기",
   },
 ];
 
@@ -43,10 +53,6 @@ function reducer(state, action) {
       return state;
   }
 }
-
-// data state를 모든 자식 컴포넌트에게 데이터+버튼을 공급하기 위한 작업
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
