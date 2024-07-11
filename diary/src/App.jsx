@@ -101,7 +101,7 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/new" element={<New />}></Route>
             {/* :id : 동적경로인 URL Parameter를 사용하겠다 */}
-            <Route path="/diary:id" element={<Diary />}></Route>
+            <Route path="/diary/:id" element={<Diary />}></Route>
             <Route path="/edit/:id" element={<Edit />}></Route>
             {/* *: wild card */}
             <Route path="*" element={<Notfound />}></Route>
