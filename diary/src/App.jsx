@@ -96,6 +96,7 @@ function App() {
     <>
       {/* data state를 모든 자식 컴포넌트에게 공급하기 위한 작업 */}
       <DiaryStateContext.Provider value={data}>
+        {/* props drilling 방지하기 위하여, context 활용 */}
         <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
           <Routes>
             <Route path="/" element={<Home />}></Route>

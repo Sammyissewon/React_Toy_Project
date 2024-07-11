@@ -51,6 +51,7 @@ const DiaryList = ({ data }) => {
           type={"POSITIVE"}
         />
       </div>
+
       <div className="list_wrapper"></div>
       {/* Home에서 필터링 된 아이템을 받아서 map 돌리고,
       돌린 아이템들은 배열이니까 각 아이템의 id를 설정하고, 스프레드 연산자로 아이템들을 DiaryItem에 props로 전달 */}

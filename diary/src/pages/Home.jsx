@@ -8,6 +8,7 @@ import DiaryList from "../Components/DiaryList";
 
 // pivotDate: Home 페이지에 설정된 월 state
 // data: App.jsx에서 받아온 일기 데이터
+// 가독성을 위해서 컴포넌트 외부에 선언
 const getMonthlyData = (pivotDate, data) => {
   const beginTime = new Date(
     // 해당 월의 시작일: state 날짜의 연, 월, 1일, 0시 0분 0초
