@@ -3,6 +3,7 @@ import "./Editor.css";
 
 import EmotionItem from "./EmotionItem";
 
+// 이모티콘 5개를 하드코딩 하지말고, 컴포넌트 외부에 배열로 선언하고 map 돌리기
 const emotionList = [
   {
     emotionId: 1,
@@ -27,6 +28,8 @@ const emotionList = [
 ];
 
 const Editor = () => {
+  const emotionId = 5;
+
   return (
     <div className="Editor">
       <section className="date_section">
@@ -38,7 +41,12 @@ const Editor = () => {
         <div className="emotion_list_wrapper">
           {/* 이모티콘 5개를 하드코딩 하지말고, 컴포넌트 외부에 배열로 선언하고 map 돌리기 */}
           {emotionList.map((item) => (
-            <EmotionItem key={item.emotionId} {...item} />
+            <EmotionItem
+              key={item.emotionId}
+              {...item}
+              // 5가지 감정 중에 선택한 이미지 1개에 효과주기. true/false로 판별.
+              isSelected={item.emotionId === emotionId}
+            />
           ))}
         </div>
       </section>
