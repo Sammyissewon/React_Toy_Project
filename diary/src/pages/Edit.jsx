@@ -12,7 +12,7 @@ const Edit = () => {
   const params = useParams();
   const nav = useNavigate();
   // App.jsx로부터 Context로 공유된 삭제함수 불러오기
-  const { onDelete } = useContext(DiaryDispatchContext);
+  const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
   // App.jsx로부터 data state 불러오기
   const data = useContext(DiaryStateContext);
   const [curDiaryItem, setCurDiaryItem] = useState();
@@ -48,6 +48,21 @@ const Edit = () => {
     }
   };
 
+  // 수정하기 -> 작성완료 버튼 클릭 시 함수
+  const onSubmit = (input) => {
+    if (window.confirm("일기를 정말 수정하겠습니까?")) {
+      // App.jsx에 있는 함수
+      onUpdate(
+        // 인수 순서 틀리면 안됨.
+        params.id,
+        input.createdDate.getTime(),
+        input.emotionId,
+        input.content
+      );
+      nav("/", { replace: true });
+    }
+  };
+
   return (
     <div>
       <Header
@@ -64,7 +79,7 @@ const Edit = () => {
           <Button onClick={onClickDelete} text={"삭제하기"} type={"NEGATIVE"} />
         }
       />
-      <Editor initData={curDiaryItem} />
+      <Editor initData={curDiaryItem} onSubmit={onSubmit} />
     </div>
   );
 };
