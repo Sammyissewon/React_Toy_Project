@@ -3,9 +3,11 @@ import { getEmotionImage } from "../util/get-emotion-image";
 
 import "./EmotionItem.css";
 
-const EmotionItem = ({ emotionId, emotionName, isSelected }) => {
+const EmotionItem = ({ emotionId, emotionName, isSelected, onClick }) => {
   return (
     <div
+      // 감정 이모션 고르는 로직
+      onClick={onClick}
       className={`EmotionItem ${
         // isSelected={item.emotionId === emotionId}이게 참이라면,
         // 해당 EmotionItem_on_${emotionId}을 클래스네임으로 부여하고, css 효과 적용

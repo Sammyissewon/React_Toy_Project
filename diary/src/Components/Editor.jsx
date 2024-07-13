@@ -5,6 +5,7 @@ import EmotionItem from "./EmotionItem";
 import Button from "./Button";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // 이모티콘 5개를 하드코딩 하지말고, 컴포넌트 외부에 배열로 선언하고 map 돌리기
 const emotionList = [
@@ -48,7 +49,8 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`;
 };
 
-const Editor = () => {
+const Editor = ({ onSubmit }) => {
+  const nav = useNavigate();
   // 오늘의 날짜, 감정, 일기내용 저장 state
   const [input, setInput] = useState({
     createdDate: new Date(),
@@ -70,7 +72,10 @@ const Editor = () => {
     setInput({ ...input, [name]: value });
   };
 
-  const emotionId = 5;
+  // 새 일기 작성 함수
+  const onClickSubmitButton = () => {
+    onSubmit(input);
+  };
 
   return (
     <div className="Editor">
@@ -90,12 +95,21 @@ const Editor = () => {
           {/* 이모티콘 5개를 하드코딩 하지말고, 컴포넌트 외부에 배열로 선언하고 map 돌리기 */}
           {emotionList.map((item) => (
             <EmotionItem
+              // 감정 이모션 고르는 로직
+              onClick={() =>
+                onChangeInput({
+                  target: {
+                    name: "emotionId",
+                    value: item.emotionId,
+                  },
+                })
+              }
               // map을 돌린 각 감정이미지 Id를 넘기고
               key={item.emotionId}
               // 스프레드 연산자로 5개 감정이미지를 보여주고
               {...item}
               // 5가지 감정 중에 선택한 이미지 1개에 효과주기. true/false로 판별.
-              isSelected={item.emotionId === emotionId}
+              isSelected={item.emotionId === input.emotionId}
             />
           ))}
         </div>
@@ -103,12 +117,27 @@ const Editor = () => {
 
       <section className="content_section">
         <h4>오늘의 일기</h4>
-        <textarea placeholder="오늘은 어땠나요?"></textarea>
+        <textarea
+          // 일기 내용
+          name="content"
+          value={input.content}
+          onChange={onChangeInput}
+          placeholder="오늘은 어땠나요?"
+        ></textarea>
       </section>
 
       <section className="button_section">
-        <Button text={"취소하기"} />
-        <Button text={"작성완료"} type={"POSITIVE"} />
+        <Button
+          onClick={() => {
+            nav(-1);
+          }}
+          text={"취소하기"}
+        />
+        <Button
+          onClick={onClickSubmitButton}
+          text={"작성완료"}
+          type={"POSITIVE"}
+        />
       </section>
     </div>
   );
