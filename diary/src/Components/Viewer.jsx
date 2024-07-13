@@ -5,9 +5,7 @@ import "./Viewer.css";
 import { getEmotionImage } from "../util/get-emotion-image";
 import { emotionList } from "../util/constants";
 
-const Viewer = () => {
-  const emotionId = 1;
-
+const Viewer = ({ emotionId, content }) => {
   // emotionList: emotionName과 emotionId를 저장해 둔 보관소
   // find를 통해서, 현재 emotionId와 보관소 내의 id가 같은 값을 불러옴
   // 혹시 모르니 String으로 감싸줌
@@ -28,7 +26,7 @@ const Viewer = () => {
       <section className="content_section">
         <h4>오늘의 일기</h4>
         <div className="content_wrapper">
-          <p>일기...</p>
+          <p>{content}</p>
         </div>
       </section>
     </div>
