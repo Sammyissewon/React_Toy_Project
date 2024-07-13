@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Editor.css";
 
 import EmotionItem from "./EmotionItem";
@@ -49,7 +49,7 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`;
 };
 
-const Editor = ({ onSubmit }) => {
+const Editor = ({ onSubmit, initData }) => {
   const nav = useNavigate();
   // 오늘의 날짜, 감정, 일기내용 저장 state
   const [input, setInput] = useState({
@@ -57,6 +57,16 @@ const Editor = ({ onSubmit }) => {
     emotionId: 3,
     content: "",
   });
+
+  // initData(curDiaryItem) 변경될 때, 즉 수정하기 버튼을 누르면 렌더링될 해당 일기의 기본값 내용
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(Number(initData.createdDate)),
+      });
+    }
+  }, [initData]);
 
   // 오늘의 날짜, 감정, 일기내용 state 변경 이벤트 로직
   const onChangeInput = (e) => {

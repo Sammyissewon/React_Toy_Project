@@ -41,6 +41,7 @@ const DiaryItem = ({ id, emotionId, createdDate, content }) => {
 
       <div className="button_section">
         {/* 버튼 클릭하면 Edit 페이지로 이동 */}
+        {/* '수정하기' 버튼 누르면, 해당 일기(id)의 edit 창으로 이동 */}
         <Button
           onClick={() => {
             nav(`/edit/${id}`);

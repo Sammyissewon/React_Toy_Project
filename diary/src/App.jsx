@@ -33,6 +33,18 @@ const mockData = [
     emotionId: 2,
     content: "3번 일기",
   },
+  {
+    id: 4,
+    createdDate: new Date("2024-07-10").getTime(),
+    emotionId: 1,
+    content: "4번 일기",
+  },
+  {
+    id: 5,
+    createdDate: new Date("2024-07-12").getTime(),
+    emotionId: 3,
+    content: "5번 일기",
+  },
 ];
 
 //기능 3가지(생성, 수정, 삭제)를 담당할 함수
