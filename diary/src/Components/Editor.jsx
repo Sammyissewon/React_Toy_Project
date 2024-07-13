@@ -3,33 +3,12 @@ import "./Editor.css";
 
 import EmotionItem from "./EmotionItem";
 import Button from "./Button";
+import { emotionList } from "../util/constants";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // 이모티콘 5개를 하드코딩 하지말고, 컴포넌트 외부에 배열로 선언하고 map 돌리기
-const emotionList = [
-  {
-    emotionId: 1,
-    emotionName: "완전 좋음",
-  },
-  {
-    emotionId: 2,
-    emotionName: "좋음",
-  },
-  {
-    emotionId: 3,
-    emotionName: "그저 그럼",
-  },
-  {
-    emotionId: 4,
-    emotionName: "나쁨",
-  },
-  {
-    emotionId: 5,
-    emotionName: "완전 나쁨",
-  },
-];
 
 // 날짜 -> YYYY-MM-DD로 변환하는 함수
 // 그냥 new Date()를 쓰면, 오늘의 날짜 value가 인식하지 못함. 문자열로 변환해서 전달해야 함
